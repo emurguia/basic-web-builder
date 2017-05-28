@@ -1,34 +1,39 @@
 
-
-var form = document.getElementById("elementOptions");
+var content; 
 var type; 
-form.onchange = function(){
+
+//function to retrive info user entered in form 
+function getInfo(){
+	var form = document.getElementById("elementOptions");
 	type = form.options[form.selectedIndex].value;
-	console.log(type);
-
+	//console.log(type);
+	content = textBox.value;
+	//console.log(content);
 }
 
-var textBox = document.getElementById("textBox"); 
-var button = document.getElementById("button1");
-button.onclick = function(){
-	var content = textBox.value;
-	console.log(content);
-	createObject(type, content);
-	
-}
-
-function createObject(tag, info){
+//function to create text HTML element 
+function createTextElement(tag, info){
 	var newObj = document.createElement(tag);
 	var text = document.createTextNode(info);
 	newObj.appendChild(text);
 	document.body.appendChild(newObj);
 }
 
-//code from informIT.com 
-/*function display() {
-  DispWin = window.open('','NewWin', 'toolbar=no,status=no,width=300,height=200')
-  message = "<ul><li><b>NAME: </b>" + document.form1.yourname.value;
-  message += "<li><b>ADDRESS: </b>" + document.form1.address.value;
-  message += "<li><b>PHONE: </b>" + document.form1.phone.value + "</ul>";
-  DispWin.document.write(message);  
-}*/
+//function to create HTML image 
+function createImage(content){
+	var newImg = document.createElement("img");
+	newImg.src = content;
+	document.body.appendChild(newImg);
+}
+
+var textBox = document.getElementById("textBox"); 
+var button = document.getElementById("button1");
+
+button.onclick = function(){
+	getInfo();
+	if(type == "h1" || type == "p") {
+		createTextElement(type, content);
+	}else if(type = "img"){
+		createImage(content);
+	}
+}
