@@ -11,10 +11,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6"> 
+				<button id="hideButton"type="button">Hide Builder</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6" id="builder"> 
 				<h1 id="title"> Build Your Own Website</h1> 
-				<p id="instructions"> Use the form below to create your website </p> 
-				
-				<form name="builder" id="builder" onsubmit="return false"> 
+				<p id="instructions"> Use the form below to create your website 
+				</p> 
+				<form name="form1" id="form1" onsubmit="return false"> 
 					<p>
 						<label> Pick element to add: </label>
 						<select id="elementOptions">
@@ -37,6 +42,7 @@
 			<div class="col-md-6 userPage" id="userPage">
 			</div> 
 		</div>
+		
 	</div>
 	<script src="script.js"type="text/javascript">
 	</script>

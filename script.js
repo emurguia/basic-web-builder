@@ -1,5 +1,3 @@
-//add error checking 
-
 var content; 
 var type; 
 var page = document.getElementById("userPage");
@@ -35,7 +33,7 @@ var goButton = document.getElementById("goButton");
 
 //function to reset Form 
 function resetForm(){
-	document.getElementById("builder").reset();
+	document.getElementById("form1").reset();
 }
 
 goButton.onclick = function(){
@@ -48,8 +46,7 @@ goButton.onclick = function(){
 	resetForm();
 }
 
-
-//function to clear HTML add by user
+//function to clear HTML added by user
 function resetPage(){
 	var list = document.getElementsByClassName("user"); 
 	for (var i = list.length - 1; i >= 0; i--) {
@@ -59,7 +56,30 @@ function resetPage(){
 }
 
 var resetButton = document.getElementById("resetButton");
-
 resetButton.onclick = function(){
 	resetPage();
+}
+
+var hideButton = document.getElementById("hideButton");
+var builder = document.getElementById("builder");
+//function to hide builder form 
+function hideBuilder(){
+	builder.style.display = "none";
+	hideButton.innerHTML = "Show Builder";
+}
+
+//function to reveal Builder
+
+function showBuilder(){
+	builder.style.display = "inline";
+	hideButton.innerHTML = "Hide Builder";
+}
+
+
+hideButton.onclick = function(){
+	if(hideButton.innerHTML == "Hide Builder"){
+		hideBuilder(); 
+	}else{
+		showBuilder(); 
+	}
 }
