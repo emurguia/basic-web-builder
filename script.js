@@ -1,6 +1,8 @@
+//add error checking 
 
 var content; 
 var type; 
+var page = document.getElementById("userPage");
 
 //function to retrive info user entered in form 
 function getInfo(){
@@ -14,26 +16,50 @@ function getInfo(){
 //function to create text HTML element 
 function createTextElement(tag, info){
 	var newObj = document.createElement(tag);
+	newObj.className = "user";
 	var text = document.createTextNode(info);
 	newObj.appendChild(text);
-	document.body.appendChild(newObj);
+	page.appendChild(newObj);
 }
 
 //function to create HTML image 
 function createImage(content){
 	var newImg = document.createElement("img");
+	newImg.className = "user";
 	newImg.src = content;
-	document.body.appendChild(newImg);
+	page.appendChild(newImg);
 }
 
 var textBox = document.getElementById("textBox"); 
-var button = document.getElementById("button1");
+var goButton = document.getElementById("goButton");
 
-button.onclick = function(){
+//function to reset Form 
+function resetForm(){
+	document.getElementById("builder").reset();
+}
+
+goButton.onclick = function(){
 	getInfo();
 	if(type == "h1" || type == "p") {
 		createTextElement(type, content);
 	}else if(type = "img"){
 		createImage(content);
 	}
+	resetForm();
+}
+
+
+//function to clear HTML add by user
+function resetPage(){
+	var list = document.getElementsByClassName("user"); 
+	for (var i = list.length - 1; i >= 0; i--) {
+		list[i].parentNode.removeChild(list[i]);
+	};
+	resetForm();
+}
+
+var resetButton = document.getElementById("resetButton");
+
+resetButton.onclick = function(){
+	resetPage();
 }
