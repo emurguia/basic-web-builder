@@ -1,16 +1,69 @@
+html, body{
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+
 .userPage{
-	background-color: gray;
-}
-.user{
+	min-height: 100%;
 }
 
-#title{
-	font-family: 'Ubuntu', sans-serif;
-}
-#instructions{
-	font-family: 'Ubuntu', sans-serif;
+#form1{
+	position: relative;
+	z-index: 1;
 }
 
-#builder{
-	font-family: 'Ubuntu', sans-serif;
+.buildWebForm{
+	position: relative;
+	z-index: 1;
+}
+
+.wideForm{ 
+	font-family: inherit;
+	width: 300px; 
+	margin: 0;
+	-webkit-box-sizing: border-box; 
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.navButton{ 
+	font-size: 16px; 
+	 background-color: #848383;
+	 color: #ffffff;
+	 border: none;
+}
+
+#welcomePopUp{
+	background-color: #81abef;
+	color: #ffffff;
+	padding: 80px; 
+	/*display: none;*/
+	/*border: 4px solid #435b82;*/
+	position: relative;
+	z-index: 3;
+	bottom: 350px;
+}
+#welcomePopUp button{
+	color: gray;
+}
+
+#welcomePopUp h1{
+	font-size: 48px;
+}
+#welcomePopUp h3{
+	font-size: 18px;
+	padding-bottom: 5px;
+}
+.dimmer {
+  /*display: none;*/
+    background: #000;
+    opacity: 0.6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
 }

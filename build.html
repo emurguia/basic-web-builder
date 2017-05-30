@@ -10,40 +10,65 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6"> 
-				<button id="hideButton"type="button">Hide Builder</button>
+			<div class="col-md-6 buildWebForm"> 
+				
+				<button id="resetButton" type="button" class="navButton">Reset </button>
+				<button id="savePage" type="button" class="navButton"> Save </button> 
+				<button id="hideButton"type="button" class="navButton">Hide Builder</button>	
 			</div>
-		</div>
+		</div> <!--end row--> 
 		<div class="row">
-			<div class="col-md-6" id="builder"> 
+			<div class="col-md-6 buildWebForm" id="builder"> 
 				<h1 id="title"> Build Your Own Website</h1> 
 				<p id="instructions"> Use the form below to create your website 
 				</p> 
 				<form name="form1" id="form1" onsubmit="return false"> 
 					<p>
-						<label> Pick element to add: </label>
-						<select id="elementOptions">
-							<option value="null" selected disabled></option>
+						<label> Pick element to add: </label><br> 
+						<select id="elementOptions" class="wideForm">
+							<option value="null" selected disabled>Select</option>
 							<option value="h1">Header</option>
 							<option value="p">Paragraph</option>
 							<option value="img">Image</option>
 						</select>
 					</p> 
 					<p>
-						<label> Add your content here: </label> 			
-						<input type="text" id="textBox">
-						<input type="button" id="goButton" value="Go">
+						<label> Add your content here: </label> <br> 			
+						<textarea rows="4" id="textBox" class="wideForm"></textarea>
+						<!--<input type="text" id="textBox" class="wide-form">-->
+					</p>
+					
+						<label> Style your content: </label> <br> 
+						<label> Color: </label>  
+						<input type="color" id="colorPicker" value="#ffffff"> <br> 
+						<label> Font: </label> <br> 
+						<select id="fonts" class="wideForm">
+							<option value="null" selected disabled>Select</option>
+							<option>Arial</option>
+							<option>Times New Roman</option>
+							<option>Helvetica</option>
+						</select>
 					</p>
 					<p> 
-						<input type="button" id="resetButton" value="Reset">
+						<button type="button" id="goButton"> Go </button> 
 					</p> 
 				</form>
 			</div> 
 			<div class="col-md-6 userPage" id="userPage">
 			</div> 
-		</div>
-		
-	</div>
+		</div> <!--end row--> 
+		<div class="row" id="welcomeRow"> 
+			<div class="col-md-6 col-md-offset-3" id="welcomePopUp">
+				<h1 class="welcome"> Welcome! </h1> 
+				<h3 class="welcome"> Want to build your own simple website with the click of a button? </h3> 
+			 	<button type="button" class="welcome" id="welcomeButton">Let's Get Started</button>
+			</div> 
+			<div class="col-md-3"> </div>
+		</div> <!--end row-->
+		<div class="row">
+			<div class="dimmer"> </div> 
+		</div> <!--end row-->
+	</div> <!--end container--> 
 	<script src="script.js"type="text/javascript">
 	</script>
 

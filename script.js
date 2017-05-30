@@ -30,10 +30,11 @@ function createImage(content){
 
 var textBox = document.getElementById("textBox"); 
 var goButton = document.getElementById("goButton");
-
-//function to reset Form 
+var colorPicker = document.getElementById("color");
+//function to reset form 
 function resetForm(){
 	document.getElementById("form1").reset();
+	color.value="#ffffff"
 }
 
 goButton.onclick = function(){
@@ -62,19 +63,18 @@ resetButton.onclick = function(){
 
 var hideButton = document.getElementById("hideButton");
 var builder = document.getElementById("builder");
-//function to hide builder form 
+
+//function to hide builder  
 function hideBuilder(){
 	builder.style.display = "none";
 	hideButton.innerHTML = "Show Builder";
 }
 
-//function to reveal Builder
-
+//function to reveal builder
 function showBuilder(){
 	builder.style.display = "inline";
 	hideButton.innerHTML = "Hide Builder";
 }
-
 
 hideButton.onclick = function(){
 	if(hideButton.innerHTML == "Hide Builder"){
@@ -82,4 +82,24 @@ hideButton.onclick = function(){
 	}else{
 		showBuilder(); 
 	}
+}
+
+//function to get rid of background dimming 
+function brighten(){
+	var dimmed = document.getElementsByClassName("dimmer");
+	/*var target = dimmed[0]*/
+	dimmed[0].style.display = "none";
+}
+
+//function to hide Welcome box 
+function hideWelcome(){
+	var box = document.getElementById("welcomeRow"); 
+	box.style.display = "none";
+}
+
+var welcomed = document.getElementById("welcomeButton");
+welcomed.onclick = function(){
+	brighten();
+	hideWelcome();
+
 }
