@@ -35,10 +35,13 @@
 					<p>
 						<label> Add your content here: </label> <br> 			
 						<textarea rows="4" id="textBox" class="wideForm"></textarea>
-						<!--<input type="text" id="textBox" class="wide-form">-->
 					</p>
-					
-						<label> Style your content: </label> <br> 
+					<div id="radio"> 
+						<label>Show Styling Options?   </label> 
+						<input type="radio" name="styling" class="wantStyle" value="no" id="radio1" checked> No Thanks 
+						<input type="radio" name="styling" class="wantStyle" value="yes" id="radio2"> Duh! <br> 
+					</div> 
+					<div id="stylingOptions"> 
 						<label> Color: </label>  
 						<input type="color" id="colorPicker" value="#ffffff"> <br> 
 						<label> Font: </label> <br> 
@@ -47,7 +50,14 @@
 							<option>Arial</option>
 							<option>Times New Roman</option>
 							<option>Helvetica</option>
-						</select>
+							<option>Georgia</option>
+							<option>Courier New</option>
+							
+						</select> 
+						<br><label> Border: </label> <br> 
+						<label> Background Color: </label> <br> 
+						<label> Size: </label> <br> 
+					</div> 
 					</p>
 					<p> 
 						<button type="button" id="goButton"> Go </button> 
