@@ -1,20 +1,6 @@
 /*
- *creating user page 
+ * CREATING USER PAGE  
  */ 
-
-var content; 
-var type; 
-var page = document.getElementById("userPage");
-var textBox = document.getElementById("textBox"); 
-
-//function to retrive info user entered in form 
-function getInfo(){
-	var form = document.getElementById("elementOptions");
-	type = form.options[form.selectedIndex].value;
-	//console.log(type);
-	content = textBox.value;
-	//console.log(content);
-}
 
 //function to get user selected font 
 function getFont(){ 
@@ -23,11 +9,26 @@ function getFont(){
 	return fontSelection;
 }
 
+//function to get user selected color 
+function getColor(index){ 
+	var pickers = document.getElementsByClassName("colorPicker")
+	var color = pickers[index].value; 
+	return color; 
+}
+
+//function to get user selected border 
+function getBorder(){
+	//
+}
+
+
 //function to style text 
 function styleText(text){ 
 	text.style.fontFamily = getFont();
+	text.style.color = getColor(0); 
+	text.style.backgroundColor = getColor(1);
+	text.style.border = getBorder();
 }
-
 
 //function to create text HTML element 
 function createTextElement(tag, info){
@@ -39,7 +40,6 @@ function createTextElement(tag, info){
 	if (styling) {
 		styleText(newObj);
 	};
-	//return newObj; 
 }
 
 //function to create HTML image 
@@ -48,84 +48,90 @@ function createImage(content){
 	newImg.className = "user";
 	newImg.src = content;
 	page.appendChild(newImg);
-	//return newImg; 
 }
 
 /* 
- * interface 
+ * WEB BUILDER INTERFACE 
  */ 
 
-//function to hide styling options
-function hideStyling(){
-	document.getElementById("stylingOptions").style.display = "none";
+var content; 
+var type; 
+var page = document.getElementById("userPage");
+var textBox = document.getElementById("textBox"); 
+
+//function to retrive info user entered in form 
+function getInfo(){
+	var form = document.getElementById("elementOptions");
+	type = form.options[form.selectedIndex].value;
+	content = textBox.value;
 }
 
-//styling form onclick 
+//function to change display of styling options
+function viewStyling(view){
+	var styles = document.getElementsByClassName("style"); 
+	for (var i = styles.length - 1; i >= 0; i--) {
+		styles[i].style.display = view; 
+	};
+}
+
+function showTextStyle(){
+	viewStyling("none");
+	var styleBlocks = document.getElementsByClassName("textStyle"); 
+	for (var i = styleBlocks.length - 1; i >= 0; i--) {
+		styleBlocks[i].style.display = "inline"; 
+	};
+}
+
+function showImgStyle(){
+	viewStyling("none");
+	var styleBlocks = document.getElementsByClassName("imgStyle"); 
+	for (var i = styleBlocks.length - 1; i >= 0; i--) {
+		styleBlocks[i].style.display = "inline"; 
+	};
+}
+
+//function to show/hide styling options 
 var radio = document.getElementById("radio"); 
 var styling = false; 
-radio.onclick = function(){
+radio.addEventListener("click", checkStyle, false); 
+function checkStyle(){
+	getInfo();
+	//console.log(type);
 	if(document.getElementById("radio1").checked){
-		hideStyling();
+		viewStyling("none");
 		styling = false; 
 	}else if(document.getElementById("radio2").checked){
-		document.getElementById("stylingOptions").style.display = "inline";
+		if(type == "h1" || type == "p") {
+			showTextStyle(); 
+		}if(type == "img"){
+			showImgStyle();
+		}else{
+			viewStyling("inline");
+		}
 		styling = true; 
 	}
 }
 
+//function to change styling options based on element 
+var elementSelect = document.getElementById("elementOptions"); 
+elementSelect.addEventListener("change", checkStyle, false);
 
-//function to reset form 
-function resetForm(){
-	document.getElementById("form1").reset();
-	if(styling){
-		document.getElementById("radio2").checked = true;
-	}
-}
-
-
-var colorPicker = document.getElementById("colorPicker");
-colorPicker.addEventListener("change", watchColorPicker(), false);
-function watchColorPicker(event){
-		//element.style.color = event.target.value;
-	
-	}
-
-
+//function to add elements to user's page 
 var goButton = document.getElementById("goButton");
 goButton.addEventListener("click", addElement, false); 
-//function to add elements to user's page 
 function addElement(){
 	getInfo();
-	//var newElement; 
 	if(type == "h1" || type == "p") {
-		//newElement = 
 		createTextElement(type, content);
-		//console.log(newText);
 	}else if(type = "img"){
-		//newElement = 
 		createImage(content);
-		//console.log(newImage);
 	}
 	resetForm();
 }
-//figure out how to add styling when adding element 
 
-
-//function to clear HTML added by user
-function resetPage(){
-	var list = document.getElementsByClassName("user"); 
-	for (var i = list.length - 1; i >= 0; i--) {
-		list[i].parentNode.removeChild(list[i]);
-	};
-	resetForm();
-	hideStyling();
-	document.getElementById("radio1").checked = true;
-}
-
-var resetButton = document.getElementById("resetButton");
-resetButton.onclick = function(){
-	resetPage();
-}
+/*
+* BUILDER SHOW/HIDE
+*/
 
 var hideButton = document.getElementById("hideButton");
 var builder = document.getElementById("builder");
@@ -150,6 +156,41 @@ hideButton.onclick = function(){
 	}
 }
 
+/*
+ * RESETS
+ */
+
+//function to reset form 
+function resetForm(){
+	document.getElementById("form1").reset();
+	if(styling){
+		viewStyling("inline");
+		document.getElementById("radio2").checked = true;
+	} else{
+		viewStyling("none");
+	}
+}
+
+//function to clear HTML added by user
+function resetPage(){
+	var list = document.getElementsByClassName("user"); 
+	for (var i = list.length - 1; i >= 0; i--) {
+		list[i].parentNode.removeChild(list[i]);
+	};
+	resetForm();
+	hideStyling();
+	document.getElementById("radio1").checked = true;
+}
+
+var resetButton = document.getElementById("resetButton");
+resetButton.onclick = function(){
+	resetPage();
+}
+
+/*
+* WELCOME POP UP 
+*/
+
 //function to get rid of background dimming 
 function brighten(){
 	var dimmed = document.getElementsByClassName("dimmer");
@@ -172,4 +213,5 @@ welcomed.onclick = function(){
 
 window.onload = function(){ 
 	resetForm();
+	//viewStyling("none");
 }
