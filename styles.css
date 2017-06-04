@@ -17,8 +17,12 @@ html, body{
 .buildWebForm{
 	position: relative;
 	z-index: 1;
+	/*background-color: #81abef;*/
 }
 
+.right{
+	background-color: #81abef;
+}
 .wideForm{ 
 	font-family: inherit;
 	width: 300px; 
@@ -28,11 +32,34 @@ html, body{
           box-sizing: border-box;
 }
 
-.navButton{ 
+.buttonAll{
+	 box-shadow: none;
 	font-size: 16px; 
-	 background-color: #848383;
-	 color: #ffffff;
+	 background-color: #ffffff;
+	 color: #000000;
 	 border: none;
+	 display: inline-block;
+	 margin: 10px 10px 0 0;
+
+}
+.deleteModeOn{ 
+	background-color: red; 
+}
+
+.deleteModeOn:hover{
+	background-color: #ff7f7f;
+}
+.navButton{ 
+	appearance: none;
+   
+}
+
+.navButton button:hover{
+	font-size: 20px; 
+}
+
+.navButton button:active{
+	color: #1754b5;
 }
 
 #welcomePopUp{
@@ -56,8 +83,8 @@ html, body{
 	font-size: 18px;
 	padding-bottom: 5px;
 }
+
 .dimmer {
-  /*display: none;*/
     background: #000;
     opacity: 0.6;
     position: fixed;
@@ -67,3 +94,26 @@ html, body{
     height: 100%;
     z-index: 2;
 }
+
+.colorPicker{
+	margin-top: 5px;
+	margin-left: 5px;
+
+}
+	
+input[type=range]{
+	width: 200px;
+	margin-left: 15px;
+}
+
+
+.borderPush{ 
+	margin-left: 15px;
+}
+
+#elementSizer{ 
+	margin-left: 0px;
+}
+
+
+

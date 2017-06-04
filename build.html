@@ -9,15 +9,23 @@
 </head>
 <body>
 	<div class="container">
+
 		<div class="row">
 			<div class="col-md-6 buildWebForm"> 
 				
-				<button id="resetButton" type="button" class="navButton">Reset </button>
-				<button id="savePage" type="button" class="navButton"> Save </button> 
-				<button id="hideButton"type="button" class="navButton">Hide Builder</button>	
+				<button id="resetButton" type="button" class="btn btn-default buttonAll navButton">Reset </button>
+				<button id="savePage" type="button" class="btn btn-default buttonAll navButton"> Save </button> 
+				<button id="hideButton"type="button" class="btn btn-default buttonAll navButton">Hide Builder</button>	
+			</div>
+			<div class="col-md-3 col-md-offset-3 userEditForm"> 
+				
+				<button id="editButton" type="button" class="btn btn-default buttonAll userButton">Edit </button>
+				<button id="deleteButton" type="button" class="btn btn-default buttonAll userButton"> Delete </button> 
+				
 			</div>
 		</div> <!--end row--> 
 		<div class="row">
+			
 			<div class="col-md-6 buildWebForm" id="builder"> 
 				<h1 id="title"> Build Your Own Website</h1> 
 				<p id="instructions"> Use the form below to create your website 
@@ -42,21 +50,43 @@
 						<input type="radio" name="styling" class="wantStyle" value="yes" id="radio2"> Duh! <br> 
 					</div> 
 					<div id="stylingOptions"> 
-						<label> Color: </label>  
-						<input type="color" id="colorPicker" value="#ffffff"> <br> 
-						<label> Font: </label> <br> 
-						<select id="fonts" class="wideForm">
-							<option value="null" selected disabled>Select</option>
-							<option>Arial</option>
-							<option>Times New Roman</option>
-							<option>Helvetica</option>
-							<option>Georgia</option>
-							<option>Courier New</option>
-							
-						</select> 
-						<br><label> Border: </label> <br> 
-						<label> Background Color: </label> <br> 
-						<label> Size: </label> <br> 
+						<div class="style textStyle"> 
+							<label> Color: </label>  
+							<input type="color" class="colorPicker" id="color1" value="#000000"> <br> 
+						</div>
+						<div class="style textStyle"> 
+							<label> Background Color: </label>
+							<input type="color" class="colorPicker" id="color2" value="#ffffff"> <br>
+						</div> 
+						<div class="style textStyle"> 
+							<label> Font: </label> <br> 
+							<select id="fonts" class="wideForm">
+								<option value="null" selected disabled>Select</option>
+								<option>Arial</option>
+								<option>Times New Roman</option>
+								<option>Helvetica</option>
+								<option>Georgia</option>
+								<option>Courier New</option>
+								
+							</select> <br>
+						</div> 
+						<div class="style textStyle imgStyle"> 
+							<div id="borderRadio">
+								<label> Border: </label> 
+								<input type="radio" name="border" value="no" id="noBorder" checked> None 
+								<input type="radio" name="border" value="yes" id="yesBorder"> Yes, Please! <br>
+							</div> 
+							<div id="borderOptions">
+								<label class="borderPush"> Size: </label>
+								<input class="borderPush" type="range" id="borderSizer" value="15" max="30">
+								<label class="borderPush"> Color: </label> 
+								<input type="color" class="colorPicker" id="color3" value="#ffffff"> <br> 
+							</div> 
+						</div> 
+						<div class="style textStyle imgStyle"> 
+							<label> Size: </label> <br>
+							<input type="range" id="elementSizer" value="36" max="75">
+						</div> 
 					</div> 
 					</p>
 					<p> 
@@ -67,6 +97,7 @@
 			<div class="col-md-6 userPage" id="userPage">
 			</div> 
 		</div> <!--end row--> 
+	
 		<div class="row" id="welcomeRow"> 
 			<div class="col-md-6 col-md-offset-3" id="welcomePopUp">
 				<h1 class="welcome"> Welcome! </h1> 
@@ -79,8 +110,10 @@
 			<div class="dimmer"> </div> 
 		</div> <!--end row-->
 	</div> <!--end container--> 
+	
 	<script src="script.js"type="text/javascript">
 	</script>
+
 
 </body>
 </html>
