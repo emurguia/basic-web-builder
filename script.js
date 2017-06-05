@@ -148,7 +148,6 @@ function viewBorderStyle(){
 	};
 }
 
-
 //function to change styling options based on element 
 var elementSelect = document.getElementById("elementOptions"); 
 elementSelect.addEventListener("change", checkStyle, false);
@@ -162,7 +161,6 @@ function checkPlaceholder(){
 		textBox.placeholder = "Paste the URL of an image here";
 	}
 }
-//var userElements = document.getElementsByClassName("user"); 
 //function to add elements to user's page 
 var goButton = document.getElementById("goButton");
 goButton.addEventListener("click", addElement, false); 
@@ -174,20 +172,51 @@ function addElement(){
 		createImage(content);
 	}
 	resetForm();
-	//function to enable elements on user elements 
-	//userElements = document.getElementsByClassName("user"); 
-	
 }
 
 /*
  * EDITING USER PAGE
  */
- var deleteMode = false; 
-//function to turn delete mode on
+
+var deleteButton = document.getElementById("deleteButton"); 
+var editButton = document.getElementById("editButton"); 
+var dimmer = document.getElementsByClassName("dimmer");
+
+//function to show popups
+function popUpView(event){ 
+	dimmer[0].style.display = "inline";
+	if(event.target == deleteButton){
+		console.log("delete clicked");
+		document.getElementById("deleteRow").style.display = "inline";
+	} else if(event.target == editButton){ 
+		console.log("edit clicked")
+		document.getElementById("editRow").style.display = "inline";
+	}
+	event.target.removeEventListener(event.type, arguments.callee)
+}
+
+var deleteGotIt = document.getElementById("deleteGotIt"); 
+var editGotIt = document.getElementById("editGotIt");
+
+//function to hide popup
+function popUpHide(event){
+	dimmer[0].style.display = "none";
+	if (event.target == deleteGotIt) {
+		console.log("delete got it");
+		document.getElementById("deleteRow").style.display = "none";
+	} else if(event.target == editGotIt){
+		console.log("edit got it");
+		document.getElementById("editRow").style.display = "none";
+	}
+}
+deleteButton.addEventListener("click", popUpView, false); 
+deleteGotIt.addEventListener("click", popUpHide, false); 
+editButton.addEventListener("click", popUpView, false); 
+editGotIt.addEventListener("click", popUpHide, false);
+
+//function to turn delete mode on/off
+var deleteMode = false; 
 function deleteModeOn(event){ 
-	//pop up message telling user to click element to delete it 
-	//pop up message that says deleting mode on 
-	//pop up message that says click delete button again to exit delete mode 
 	if(deleteMode){
 		deleteButton.classList.remove("deleteModeOn");
 		deleteButton.innerHTML = "Delete";
@@ -199,37 +228,79 @@ function deleteModeOn(event){
 		deleteMode = true; 
 	}
 }
-
- //turning delete mode on/off
-var deleteButton = document.getElementById("deleteButton"); 
 deleteButton.addEventListener("click", deleteModeOn, false);
 
-
-
-/*
-var editButton = document.getElementById("editButton"); 
-editButton.addEventListener("click", editModeOn, false); 
+//function to turn edit mode on/off
+var editMode = false; 
 function editModeOn(event){ 
-	console.log("edit mode on");
+	if(editMode){
+		editButton.classList.remove("editModeOn");
+		editButton.innerHTML = "Edit";
+		editMode = false;
+		//textBox.removeEventListener("input", editElement);
+		console.log("edit mode off");
+		resetForm();
+	}else{
+		editButton.classList.add("editModeOn");
+		editButton.innerHTML = "Edit Mode On";
+		console.log("edit mode"); 
+		editMode = true; 
+	}
 }
-*/
+editButton.addEventListener("click", editModeOn, false); 
+//editButton.addEventListener("click", )
 
-//event listener for all user elements 
-var userPage = document.getElementById("userPage"); 
-userPage.addEventListener("click", deleteElement, false); 
-
-function deleteElement(event){ 
+//function to delete elements
+function changeUserElement(event){ 
 	if(event.target !== event.currentTarget){ 
-		console.log(deleteMode);
-		if(deleteMode){ 
-			console.log("delete mode on, deleteElement called")
-			var clickedItem = event.target;
+		//console.log(deleteMode);
+		var clickedItem = event.target;
+		if(deleteMode && editMode){
+			alert("Oops, cannot edit and delete at same time!");
+		}else if(deleteMode){ 
+			//console.log("delete mode on, deleteElement called")
 			clickedItem.parentNode.removeChild(clickedItem);
-			console.log(clickedItem); 
+			//console.log(clickedItem); 
+		}else if(editMode){
+			console.log("editing");
+			//console.log(clickedItem.tagName);
+			if(clickedItem.tagName != "IMG"){
+				textBox.value = clickedItem.innerHTML;
+				console.log(clickedItem.innerHTML);
+
+				function editElement(event){
+					console.log("textBox input event firing");
+					clickedItem.innerHTML = textBox.value;
+				}
+				textBox.addEventListener("input", editElement, false);
+			}
 		}
+		function stopText(event){
+			textBox.removeEventListener("input", editElement);
+		}
+		editButton.addEventListener("click", stopText, false);
+		userPage.addEventListener("click", stopText, false);
 	}
 	event.stopPropagation();
 }
+
+/*function editUserText(event){
+
+}*/
+//event listener for all user elements 
+var userPage = document.getElementById("userPage"); 
+userPage.addEventListener("click", changeUserElement, false); 
+//textBox.addEventListener("input", editUserText,false);
+
+
+
+//testing edit 
+
+/*function testEdit(event){ 
+	console.log(textBox.value);
+}
+
+textBox.addEventListener("input", testEdit, false);*/
 
 
 /*
@@ -313,7 +384,6 @@ var welcomed = document.getElementById("welcomeButton");
 welcomed.onclick = function(){
 	brighten();
 	hideWelcome();
-
 }
 
 window.onload = function(){ 
