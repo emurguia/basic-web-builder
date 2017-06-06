@@ -5,6 +5,9 @@
 //function to get user selected font 
 function getFont(){ 
 	var fontForm = document.getElementById("fonts");
+	if(fontForm.selectedIndex == 0){
+		return "Ubuntu";
+	}
 	var fontSelection = fontForm.options[fontForm.selectedIndex].value;
 	return fontSelection;
 }
@@ -13,6 +16,7 @@ function getFont(){
 function getColor(index){ 
 	var pickers = document.getElementsByClassName("colorPicker")
 	var color = pickers[index].value; 
+	//console.log(pickers[index].value);
 	return color; 
 }
 
@@ -33,6 +37,7 @@ function getSize(){
 
 //function to style text 
 function styleText(text){ 
+	//console.log("style text called");
 	text.style.fontFamily = getFont();
 	text.style.color = getColor(0); 
 	text.style.backgroundColor = getColor(1);
@@ -42,12 +47,26 @@ function styleText(text){
 		text.style.borderColor = getColor(2);
 	};
 	text.style.fontSize = getSize() + "px"; 
-	
 }
 
+//function to style image 
+function styleImg(image){
+	console.log("style image called");
+	if (border) {
+		image.style.border = "solid "+ getBorder() + "px";
+		//console.log("solid"+ getBorder() + "px");
+		image.style.borderColor = getColor(2);
+	};
+	var size = getSize();
+	size = size *10; 
+	//console.log(size);
+	image.style.maxHeight = size +"px";
+}
+
+
 //function to create text HTML element 
-function createTextElement(tag, info){
-	var newObj = document.createElement(tag);
+function createTextElement(info){
+	var newObj = document.createElement("p");
 	newObj.className = "user";
 	//newObj.draggable = "true"; 
 	var text = document.createTextNode(info);
@@ -64,6 +83,9 @@ function createImage(content){
 	newImg.className = "user";
 	newImg.src = content;
 	page.appendChild(newImg);
+	if(styling){
+		styleImg(newImg);
+	}
 }
 
 /* 
@@ -121,7 +143,7 @@ function checkStyle(){
 		viewStyling("none");
 		styling = false; 
 	}else if(document.getElementById("radio2").checked){
-		if(type == "h1" || type == "p") {
+		if(type == "p") {
 			showTextStyle(); 
 		}if(type == "img"){
 			showImgStyle();
@@ -155,24 +177,29 @@ elementSelect.addEventListener("change", checkStyle, false);
 //function to change placeholder based on element 
 elementSelect.addEventListener("change", checkPlaceholder, false); 
 function checkPlaceholder(){ 
-	if(type == "h1" || type == "p") {
+	if(type == "p") {
 		textBox.placeholder = "Add your text here"; 
 	}else if(type = "img"){
 		textBox.placeholder = "Paste the URL of an image here";
 	}
 }
 //function to add elements to user's page 
-var goButton = document.getElementById("goButton");
-goButton.addEventListener("click", addElement, false); 
 function addElement(){
 	getInfo();
-	if(type == "h1" || type == "p") {
-		createTextElement(type, content);
-	}else if(type = "img"){
+	if(type == "p") {
+		createTextElement(content);
+		resetForm();
+	}else if(type == "img"){
 		createImage(content);
+		resetForm();
+	}else{
+		document.getElementById("errorMsg").style.display = "inline";
 	}
-	resetForm();
 }
+
+var goButton = document.getElementById("goButton");
+goButton.addEventListener("click", addElement, false); 
+
 
 /*
  * EDITING USER PAGE
@@ -186,10 +213,10 @@ var dimmer = document.getElementsByClassName("dimmer");
 function popUpView(event){ 
 	dimmer[0].style.display = "inline";
 	if(event.target == deleteButton){
-		console.log("delete clicked");
+		//console.log("delete clicked");
 		document.getElementById("deleteRow").style.display = "inline";
 	} else if(event.target == editButton){ 
-		console.log("edit clicked")
+		//console.log("edit clicked")
 		document.getElementById("editRow").style.display = "inline";
 	}
 	event.target.removeEventListener(event.type, arguments.callee)
@@ -202,17 +229,18 @@ var editGotIt = document.getElementById("editGotIt");
 function popUpHide(event){
 	dimmer[0].style.display = "none";
 	if (event.target == deleteGotIt) {
-		console.log("delete got it");
+		//console.log("delete got it");
 		document.getElementById("deleteRow").style.display = "none";
 	} else if(event.target == editGotIt){
-		console.log("edit got it");
+		//console.log("edit got it");
 		document.getElementById("editRow").style.display = "none";
 	}
 }
-deleteButton.addEventListener("click", popUpView, false); 
+/* commeted out to streamline editing process */
+/*deleteButton.addEventListener("click", popUpView, false); 
 deleteGotIt.addEventListener("click", popUpHide, false); 
 editButton.addEventListener("click", popUpView, false); 
-editGotIt.addEventListener("click", popUpHide, false);
+editGotIt.addEventListener("click", popUpHide, false);*/
 
 //function to turn delete mode on/off
 var deleteMode = false; 
@@ -224,7 +252,7 @@ function deleteModeOn(event){
 	}else{
 		deleteButton.classList.add("deleteModeOn");
 		deleteButton.innerHTML = "Delete Mode On";
-		console.log("delete mode"); 
+		//console.log("delete mode"); 
 		deleteMode = true; 
 	}
 }
@@ -243,7 +271,7 @@ function editModeOn(event){
 	}else{
 		editButton.classList.add("editModeOn");
 		editButton.innerHTML = "Edit Mode On";
-		console.log("edit mode"); 
+		//console.log("edit mode"); 
 		editMode = true; 
 	}
 }
@@ -253,54 +281,75 @@ editButton.addEventListener("click", editModeOn, false);
 //function to delete elements
 function changeUserElement(event){ 
 	if(event.target !== event.currentTarget){ 
-		//console.log(deleteMode);
 		var clickedItem = event.target;
+		var stylingOptions = document.getElementById("stylingOptions");
 		if(deleteMode && editMode){
 			alert("Oops, cannot edit and delete at same time!");
 		}else if(deleteMode){ 
-			//console.log("delete mode on, deleteElement called")
 			clickedItem.parentNode.removeChild(clickedItem);
-			//console.log(clickedItem); 
 		}else if(editMode){
-			console.log("editing");
-			//console.log(clickedItem.tagName);
-			if(clickedItem.tagName != "IMG"){
+			/*if(clickedItem.tagName != "IMG"){*/
 				textBox.value = clickedItem.innerHTML;
-				console.log(clickedItem.innerHTML);
-
+				//console.log(clickedItem.innerHTML);
+				//update text as user types 
 				function editElement(event){
-					console.log("textBox input event firing");
 					clickedItem.innerHTML = textBox.value;
 				}
 				textBox.addEventListener("input", editElement, false);
-			}
+
+				//update styling as user makes changes
+				function responsiveStyling(event){
+					if(event.target !== event.currentTarget){
+						if(event.target == document.getElementById("color1")){
+							console.log("changing color");
+							clickedItem.style.color = getColor(0);
+						}else if(event.target == document.getElementById("color2")){
+							clickedItem.style.backgroundColor = getColor(1);
+						}else if(event.target == document.getElementById("fonts")){
+							clickedItem.style.fontFamily = getFont();
+						}else if(event.target == document.getElementById("borderSizer")){
+							clickedItem.style.border = "solid "+ getBorder() + "px";
+						}else if(event.target == document.getElementById("color3")){
+							clickedItem.style.borderColor = getColor(2);
+						}else if(event.target == document.getElementById("elementSizer")){
+							if(clickedItem.tagName == "IMG"){
+								var size = getSize(); 
+								size = size * 10; 
+								
+								clickedItem.style.maxHeight = size  + "px";
+							}else{
+								clickedItem.style.fontSize = getSize() + "px";
+							}			
+						}
+						//console.log("input on styling form event fired");
+						/*
+						if (border) {
+							clickedItem.style.border = "solid "+ getBorder() + "px";
+							//console.log("solid"+ getBorder() + "px");
+							clickedItem.style.borderColor = getColor(2);
+						};
+						clickedItem.style.fontSize = getSize() + "px"; */
+					}
+					event.stopPropagation();		
+				}
+				stylingOptions.addEventListener("input", responsiveStyling, false);
+			/*}*/
 		}
-		function stopText(event){
+		function stopEditing(event){
 			textBox.removeEventListener("input", editElement);
+			stylingOptions.removeEventListener("input", responsiveStyling);
 		}
-		editButton.addEventListener("click", stopText, false);
-		userPage.addEventListener("click", stopText, false);
+		editButton.addEventListener("click", stopEditing, false);
+		userPage.addEventListener("click", stopEditing, false);
 	}
 	event.stopPropagation();
 }
 
-/*function editUserText(event){
 
-}*/
 //event listener for all user elements 
 var userPage = document.getElementById("userPage"); 
 userPage.addEventListener("click", changeUserElement, false); 
 //textBox.addEventListener("input", editUserText,false);
-
-
-
-//testing edit 
-
-/*function testEdit(event){ 
-	console.log(textBox.value);
-}
-
-textBox.addEventListener("input", testEdit, false);*/
 
 
 /*
@@ -337,6 +386,7 @@ hideButton.onclick = function(){
 //function to reset form 
 function resetForm(){
 	document.getElementById("form1").reset();
+	document.getElementById("errorMsg").style.display = "none";
 	if(styling){
 		viewStyling("inline");
 		document.getElementById("radio2").checked = true;

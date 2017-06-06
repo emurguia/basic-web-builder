@@ -9,6 +9,8 @@ html, body{
 	min-height: 100%;
 }
 
+/*FORM*/
+
 #form1{
 	position: relative;
 	z-index: 1;
@@ -31,7 +33,21 @@ html, body{
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+	
+input[type=range]{
+	width: 200px;
+	margin-left: 15px;
+}
 
+.borderPush{ 
+	margin-left: 15px;
+}
+
+#elementSizer{ 
+	margin-left: 0px;
+}
+
+/*BUTTONS */
 .buttonAll{
 	 box-shadow: none;
 	font-size: 16px; 
@@ -42,6 +58,9 @@ html, body{
 	 margin: 10px 10px 0 0;
 
 }
+.userButton{
+	margin-bottom: 15px;
+}
 .deleteModeOn{ 
 	background-color: red; 
 }
@@ -49,10 +68,7 @@ html, body{
 .deleteModeOn:hover{
 	background-color: #ff7f7f;
 }
-.navButton{ 
-	appearance: none;
-   
-}
+
 
 .navButton button:hover{
 	font-size: 20px; 
@@ -62,16 +78,27 @@ html, body{
 	color: #1754b5;
 }
 
-#welcomePopUp{
-	background-color: #81abef;
-	color: #ffffff;
-	padding: 80px; 
-	/*display: none;*/
-	/*border: 4px solid #435b82;*/
+.editModeOn{
+	background-color: green; 
+}
+.editModeOn:hover{
+	background-color: #aeffae;
+
+}
+
+/*WELCOME POP UP*/
+.popUp{
 	position: relative;
 	z-index: 3;
 	bottom: 350px;
+	color: #ffffff;
 }
+
+#welcomePopUp{
+	background-color: #81abef;
+	padding: 80px; 
+}
+
 #welcomePopUp button{
 	color: gray;
 }
@@ -95,25 +122,56 @@ html, body{
     z-index: 2;
 }
 
+/*.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}*/
+
+/*DELETE POP UP*/
+#deleteRow{
+	display: none;
+}
+#deletePopUp{
+	background-color: red;
+	padding: 60px; 
+}
+
+#deletePopUp h1{
+	font-size: 20px;
+}
+#deletePopUp button{
+	color: gray;
+}
 .colorPicker{
 	margin-top: 5px;
 	margin-left: 5px;
-
-}
-	
-input[type=range]{
-	width: 200px;
-	margin-left: 15px;
 }
 
-
-.borderPush{ 
-	margin-left: 15px;
+#editRow{
+	display: none; 
 }
 
-#elementSizer{ 
-	margin-left: 0px;
+#editPopUp{ 
+	background-color: green; 
+	padding: 60px; 
 }
 
+#editPopUp h1{
+	font-size: 20px;
+
+}
+
+#editPopUp button{
+	color: gray;
+}
+
+.error{
+	color: red;
+	font-weight: bold;
+	/*margin-top: 5px;*/
+	/*margin-bottom: 5px;*/
+	display: none;
+}
 
 

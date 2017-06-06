@@ -17,7 +17,7 @@
 				<button id="savePage" type="button" class="btn btn-default buttonAll navButton"> Save </button> 
 				<button id="hideButton"type="button" class="btn btn-default buttonAll navButton">Hide Builder</button>	
 			</div>
-			<div class="col-md-3 col-md-offset-3 userEditForm"> 
+			<div class="col-md-4 col-md-offset-2 userEditForm"> 
 				
 				<button id="editButton" type="button" class="btn btn-default buttonAll userButton">Edit </button>
 				<button id="deleteButton" type="button" class="btn btn-default buttonAll userButton"> Delete </button> 
@@ -30,13 +30,14 @@
 				<h1 id="title"> Build Your Own Website</h1> 
 				<p id="instructions"> Use the form below to create your website 
 				</p> 
+				<p id="errorMsg" class="error"> Please select an element </p>
 				<form name="form1" id="form1" onsubmit="return false"> 
 					<p>
 						<label> Pick element to add: </label><br> 
 						<select id="elementOptions" class="wideForm">
 							<option value="null" selected disabled>Select</option>
-							<option value="h1">Header</option>
-							<option value="p">Paragraph</option>
+							<!--<option value="h1">Header</option>-->
+							<option value="p">Text</option>
 							<option value="img">Image</option>
 						</select>
 					</p> 
@@ -52,7 +53,7 @@
 					<div id="stylingOptions"> 
 						<div class="style textStyle"> 
 							<label> Color: </label>  
-							<input type="color" class="colorPicker" id="color1" value="#000000"> <br> 
+							<input type="color" class="colorPicker" id="color1"> <br> 
 						</div>
 						<div class="style textStyle"> 
 							<label> Background Color: </label>
@@ -99,13 +100,34 @@
 		</div> <!--end row--> 
 	
 		<div class="row" id="welcomeRow"> 
-			<div class="col-md-6 col-md-offset-3" id="welcomePopUp">
+			<div class="col-md-6 col-md-offset-3 popUp" id="welcomePopUp">
 				<h1 class="welcome"> Welcome! </h1> 
 				<h3 class="welcome"> Want to build your own simple website with the click of a button? </h3> 
 			 	<button type="button" class="welcome" id="welcomeButton">Let's Get Started</button>
 			</div> 
 			<div class="col-md-3"> </div>
 		</div> <!--end row-->
+		<div class="row" id="deleteRow"> 
+			<div class="col-md-6 col-md-offset-3 popUp" id="deletePopUp">
+				<h1 class="deletePopUpElement"> Click any element to delete it. </h1> 
+				<h1 class="deletePopUpElement"> Click Delete Button to turn off Delete Mode. 
+				</h1> 
+			 	<button type="button" class="deletePopUpElement" id="deleteGotIt">Got It
+			 	</button>
+			</div> 
+			<div class="col-md-3"> </div>
+		</div> 
+		<div class="row" id="editRow"> 
+			<div class="col-md-6 col-md-offset-3 popUp" id="editPopUp">
+				<h1 class="editPopUpElement"> Click any element to edit it. Then use the form to make edits. </h1> 
+				<h1 class="editPopUpElement"> Click Edit Button to turn off Edit Mode. 
+				</h1> 
+			 	<button type="button" class="editPopUpElement" id="editGotIt">Got It
+			 	</button>
+			</div> 
+			<div class="col-md-3"> </div>
+		</div> 
+	
 		<div class="row">
 			<div class="dimmer"> </div> 
 		</div> <!--end row-->
