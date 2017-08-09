@@ -1,6 +1,6 @@
 <h1> Basic Website Builder </h1> 
 
-<p> This is a project I am working on as I learn/teach myself JavaScript. 
+<p> A basic project to engage with JavaScript concepts and the DOM. 
 
-The concept is a script that allows the user to build a simple website in the browser. </p>
+Allows the users to add text and image elements to a webpage and to create their own webpage. </p>
 
