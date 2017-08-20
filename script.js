@@ -237,10 +237,10 @@ function popUpHide(event){
 	}
 }
 /* commeted out to streamline editing process */
-/*deleteButton.addEventListener("click", popUpView, false); 
+deleteButton.addEventListener("click", popUpView, false); 
 deleteGotIt.addEventListener("click", popUpHide, false); 
 editButton.addEventListener("click", popUpView, false); 
-editGotIt.addEventListener("click", popUpHide, false);*/
+editGotIt.addEventListener("click", popUpHide, false);
 
 //function to turn delete mode on/off
 var deleteMode = false; 

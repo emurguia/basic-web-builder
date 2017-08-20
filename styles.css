@@ -4,6 +4,12 @@ html, body{
 	margin: 0;
 	font-family: 'Ubuntu', sans-serif;
 }
+html{ 
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit
+}
 
 .userPage{
 	min-height: 100%;
